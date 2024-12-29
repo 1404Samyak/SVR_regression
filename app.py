@@ -3,10 +3,10 @@ import numpy as np
 import pickle
 import pandas as pd
 
-csv_file_path = 'C:\Users\mahap\OneDrive\Desktop\C++,JS python codes\.vscode\ML-DL-NLP\myenv\CompleteSVRproject\Salary Data.csv'
+csv_file_path = r'C:\Users\mahap\OneDrive\Desktop\C++,JS python codes\.vscode\ML-DL-NLP\myenv\CompleteSVRproject\Salary Data.csv'
 data = pd.read_csv(csv_file_path)
 
-st.title("Prediction App")
+st.title("Salary Prediction App")
 st.write("### Data Overview")
 st.write(data.head())
 
@@ -33,6 +33,8 @@ if st.button("Predict"):
 
         # Convert user input to a DataFrame
         input_df = pd.DataFrame([user_input])
+        input_df=pd.get_dummies(input_df,columns=['Education Level'],drop_first=True)
+        input_df[['Education Level_Master\'s','Education Level_PhD']]=input_df[['Education Level_Master\'s','Education Level_PhD']].astype(int) 
 
         # Handle categorical features
         if encoder:
